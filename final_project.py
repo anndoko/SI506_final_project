@@ -58,7 +58,25 @@ def request_itunes_data(search_string, search_type = "song"):
 
         return CACHE_DICTION[unique_id]
 
+# PART 2. SONG CLASS
+class Song:
+    def __init__(self, song_diction):
+        self.title = song_diction["trackName"]
+        self.artist = song_diction["artistName"]
+        self.album = song_diction["collectionName"]
+        self.length = song_diction["trackTimeMillis"]
+
+    def __str__(self):
+        return "* Title: {}\n* Artist: {}\n* Album: {}\n* Length: {}\n".format(self.title, self.artist, self.album, self.length)
+
+
+
+
 # ===== TESTING =====
 test_data = request_itunes_data("Adele")
 test_data2 = request_itunes_data("Jack White")
 test_data3 = request_itunes_data("Spiritualized")
+
+for diction in test_data['results']:
+    inst = Song(diction)
+    print(inst)

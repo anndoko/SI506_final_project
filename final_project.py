@@ -4,18 +4,22 @@ import json
 
 # ===== Facebook =====
 # PART 1. DATA REQUEST
-def request_facebook_data(page_link):
+def request_my_facebook_data():
     facebook_access_token = "EAAH5wRVZCn2EBACR8Kf22u1FP9ZBaCo8085HhSWlasuRwllOZCuBvhDpK8h705eXhupZCxG3D9DkoGvt5sSYyZCwkZCJzZC8CTePH5gs1LJoyvkEc8HjHIFe1BOeO9GZCGvlLOgMVXKXNi75wQqH18oJSR9TRmGr4QkakqKZBdKQkPpVi1GgrwDTXTzmJnTrJXkMZD"
+
+    base_url = 'https://graph.facebook.com/me/feed'
 
     params_diction = {}
     params_diction["access_token"] = facebook_access_token
-    params_diction["limit"] = 1
-    params_diction["fields"] = "name, message, link, comments"
+    params_diction["limit"] = 10
+    params_diction["fields"] = "message, link, description, comments, likes"
 
-    results = requests.get(url = page_link, params = params_diction)
+    results = requests.get(url = base_url, params = params_diction)
     facebook_data_py = json.loads(results.text)
 
     return facebook_data_py
+
+# PART 2. POST CLASS
 
 # ===== iTunes =====
 # PART 1. DATA REQUEST & CACHING
@@ -88,7 +92,7 @@ class Song:
 
 
 # ===== TESTING =====
-# ===== iTunes =====
+# --- iTunes ---
 # itunes_test_data_1 = request_itunes_data("Adele")
 # itunes_test_data_2 = request_itunes_data("Jack White")
 # itunes_test_data_3 = request_itunes_data("Spiritualized")
@@ -97,10 +101,6 @@ class Song:
 #     inst = Song(diction)
 #     print(inst)
 
-# ===== Facebook =====
-# source_1 = 'https://graph.facebook.com/me/feed'
-# source_2 = 'https://graph.facebook.com/nmemagazine/feed'
-# facebook_test_data_1 = request_facebook_data(source_1)
-# facebook_test_data_2 = request_facebook_data(source_2)
-# print(facebook_test_data_1)
-# print(facebook_test_data_2)
+# --- Facebook ---
+facebook_test_data_1 = request_my_facebook_data()
+print(facebook_test_data_1)

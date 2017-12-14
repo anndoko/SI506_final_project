@@ -2,6 +2,21 @@
 import requests
 import json
 
+# ===== Facebook =====
+# PART 1. DATA REQUEST
+def request_facebook_data(page_link):
+    facebook_access_token = "EAAH5wRVZCn2EBACR8Kf22u1FP9ZBaCo8085HhSWlasuRwllOZCuBvhDpK8h705eXhupZCxG3D9DkoGvt5sSYyZCwkZCJzZC8CTePH5gs1LJoyvkEc8HjHIFe1BOeO9GZCGvlLOgMVXKXNi75wQqH18oJSR9TRmGr4QkakqKZBdKQkPpVi1GgrwDTXTzmJnTrJXkMZD"
+
+    params_diction = {}
+    params_diction["access_token"] = facebook_access_token
+    params_diction["limit"] = 1
+    params_diction["fields"] = "name, message, link, comments"
+
+    results = requests.get(url = page_link, params = params_diction)
+    facebook_data_py = json.loads(results.text)
+
+    return facebook_data_py
+
 # ===== iTunes =====
 # PART 1. DATA REQUEST & CACHING
 # set up a file for caching
@@ -73,10 +88,19 @@ class Song:
 
 
 # ===== TESTING =====
-test_data = request_itunes_data("Adele")
-test_data2 = request_itunes_data("Jack White")
-test_data3 = request_itunes_data("Spiritualized")
+# ===== iTunes =====
+# itunes_test_data_1 = request_itunes_data("Adele")
+# itunes_test_data_2 = request_itunes_data("Jack White")
+# itunes_test_data_3 = request_itunes_data("Spiritualized")
+#
+# for diction in itunes_test_data_1['results']:
+#     inst = Song(diction)
+#     print(inst)
 
-for diction in test_data['results']:
-    inst = Song(diction)
-    print(inst)
+# ===== Facebook =====
+# source_1 = 'https://graph.facebook.com/me/feed'
+# source_2 = 'https://graph.facebook.com/nmemagazine/feed'
+# facebook_test_data_1 = request_facebook_data(source_1)
+# facebook_test_data_2 = request_facebook_data(source_2)
+# print(facebook_test_data_1)
+# print(facebook_test_data_2)

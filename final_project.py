@@ -12,7 +12,7 @@ def request_my_facebook_data():
     params_diction = {}
     params_diction["access_token"] = facebook_access_token
     params_diction["limit"] = 10
-    params_diction["fields"] = "message, link, description, comments, likes"
+    params_diction["fields"] = "message, link, name, comments, likes"
 
     results = requests.get(url = base_url, params = params_diction)
     facebook_data_py = json.loads(results.text)
@@ -20,6 +20,40 @@ def request_my_facebook_data():
     return facebook_data_py
 
 # PART 2. POST CLASS
+class Post:
+    def __init__(self, post_diction):
+        # message
+        if 'message' in post_diction:
+            self.message = post_diction['message']
+        else:
+            self.message = ''
+
+        # link
+        if "link" in post_diction:
+            self.link = post_diction['link']
+        else:
+            self.link = ''
+
+        # title (the name of the link)
+        if "name" in post_diction:
+            self.title = post_diction['name']
+        else:
+            self.title = ''
+
+        # comments
+        if "comments" in post_diction:
+            self.comments = post_diction['comments']['data']
+        else:
+            self.comments = []
+
+        # likes
+        if "likes" in post_diction:
+            self.likes = post_diction['likes']['data']
+        else:
+            self.likes = []
+
+    def __str__(self):
+        return "* Message: {}\n* Link: {}\n* Title: {}\n* Comments: {}\n* Likes: {}\n".format(self.message, self.link, self.title, len(self.comments), len(self.likes))
 
 # ===== iTunes =====
 # PART 1. DATA REQUEST & CACHING
@@ -104,3 +138,6 @@ class Song:
 # --- Facebook ---
 facebook_test_data_1 = request_my_facebook_data()
 print(facebook_test_data_1)
+for message_diction in facebook_test_data_1['data']:
+    inst = Post(message_diction)
+    print(inst)

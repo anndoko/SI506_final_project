@@ -5,13 +5,13 @@ import json
 # ===== Facebook =====
 # PART 1. DATA REQUEST
 def request_my_facebook_data():
-    facebook_access_token = "EAAH5wRVZCn2EBACR8Kf22u1FP9ZBaCo8085HhSWlasuRwllOZCuBvhDpK8h705eXhupZCxG3D9DkoGvt5sSYyZCwkZCJzZC8CTePH5gs1LJoyvkEc8HjHIFe1BOeO9GZCGvlLOgMVXKXNi75wQqH18oJSR9TRmGr4QkakqKZBdKQkPpVi1GgrwDTXTzmJnTrJXkMZD"
+    facebook_access_token = "EAACEdEose0cBAB47WTQRZBH5v0JrZBI7bu5W2Rx5RIfd14FoiwaNAXYFGZC0oix1YtqTYcNgjrxvOOBldhz6hceAHmWFZAPBmjqyryYF9HMn0j2lba0cNZBqYxBgyWYCRKtH23nfv8mZAzSdVy6M4ay6GdPBtZCZAcPGrXB2ThUxcEbZB0GGyI5dBw92ldDuZCamIZD"
 
     base_url = 'https://graph.facebook.com/me/feed'
 
     params_diction = {}
     params_diction["access_token"] = facebook_access_token
-    params_diction["limit"] = 10
+    params_diction["limit"] = 50
     params_diction["fields"] = "message, link, name, comments, likes"
 
     results = requests.get(url = base_url, params = params_diction)
@@ -54,6 +54,19 @@ class Post:
 
     def __str__(self):
         return "* Message: {}\n* Link: {}\n* Title: {}\n* Comments: {}\n* Likes: {}\n".format(self.message, self.link, self.title, len(self.comments), len(self.likes))
+
+    def stopwords_remover(self):
+        # a list of stopwords
+        stopwords_lst = ["the", "a", "and", "is", "are", "that", "i", "my", "when", "which", "this", "of", "to", "will", "for", "you", "your", "from", "so", "it", "all", "she", "her", "he", "his", "we", "us", "our", "in", "me", "on", "must", "by", "have", "own", "out", "be"]
+
+        message_content = self.message.lower().split()
+        post_without_stopwords = []
+        for word in message_content:
+            if word not in stopwords_lst:
+                post_without_stopwords.append(word)
+
+        # return a list of all the words in the post that are not “stopwords”
+        return post_without_stopwords
 
 # ===== iTunes =====
 # PART 1. DATA REQUEST & CACHING
@@ -137,7 +150,7 @@ class Song:
 
 # --- Facebook ---
 facebook_test_data_1 = request_my_facebook_data()
-print(facebook_test_data_1)
 for message_diction in facebook_test_data_1['data']:
     inst = Post(message_diction)
-    print(inst)
+    lst = inst.stopwords_remover()
+    print(lst)

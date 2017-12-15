@@ -78,7 +78,7 @@
       ```
 
   2. Two files will be created after you run the program:
-      1. **SI506finalproject_cache.json** a file that the program outputs to store the cached data
+      1. **SI506finalproject_cache.json** is a file that the program outputs to store the cached data
         [SAMPLE FILE](https://github.com/anndoko/SI506_final_project/blob/master/SI506finalproject_cache.json)
 
       2. **itunes_sorted_results.csv** is a .cvs file that the program outputs to store the sorted results

@@ -57,7 +57,9 @@ END REQUIREMENTS LIST
 
   2. Two files will be created after you run the program:
       (1) SI506finalproject_cache.json: this is a file that stores cached data
-      SAMPLE: https://github.com/anndoko/SI506_final_project/blob/master/SI506finalproject_cache.json
+      SAMPLE:
+      https://github.com/anndoko/SI506_final_project/blob/master/SI506finalproject_cache.json
 
       (2) itunes_sorted_results.csv: this is a .cvs file that stores the sorted results
-      SAMPLE: https://github.com/anndoko/SI506_final_project/blob/master/itunes_sorted_results.csv
+      SAMPLE:
+      https://github.com/anndoko/SI506_final_project/blob/master/itunes_sorted_results.csv

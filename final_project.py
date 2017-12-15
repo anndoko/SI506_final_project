@@ -165,17 +165,23 @@ class Song:
         self.title = song_diction["trackName"]
         self.artist = song_diction["artistName"]
         self.album = song_diction["collectionName"]
-        self.length = song_diction["trackTimeMillis"]
+        self.length = song_diction["trackTimeMillis"] # milliseconds
+
+    # a class method to convert milliseconds to minutes and seconds
+    def convert_track_time(self):
+        track_time_min = int(self.length/1000/60)
+        track_time_sec = int(self.length/1000 % 60)
+        return "{} min {} sec".format(track_time_min, track_time_sec)
 
     def __str__(self):
-        return "* Title: {}\n* Artist: {}\n* Album: {}\n* Length: {}\n".format(self.title, self.artist, self.album, self.length)
+        return "* Title: {}\n* Artist: {}\n* Album: {}\n* Length: {} ({})\n".format(self.title, self.artist, self.album, self.convert_track_time())
 
 # ===== TESTING =====
 # --- iTunes ---
-# itunes_test_data_1 = request_itunes_data("Adele")
+itunes_test_data_1 = request_itunes_data("Adele")
 # itunes_test_data_2 = request_itunes_data("Jack White")
 # itunes_test_data_3 = request_itunes_data("Spiritualized")
 #
-# for diction in itunes_test_data_1['results']:
-#     inst = Song(diction)
-#     print(inst)
+for diction in itunes_test_data_1['results']:
+    inst = Song(diction)
+    print(inst)

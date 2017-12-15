@@ -16,7 +16,7 @@ SI 506 FINAL PROJECT README
 
 * **How to run the code?**
 
-  Simply download the file "SI506_finalproject.py" and enter the command line "python3 SI506_finalproject.py" in your terminal to run the code.
+  Simply download the file "SI506_finalproject.py" and enter the command line `python3 SI506_finalproject.py` in your terminal to run the code.
 
 * **REQUIREMENTS LIST:**
   * **Get and cache data from 2 REST APIs (list the lines where the functions to get & cache data begin and where they are invoked):**

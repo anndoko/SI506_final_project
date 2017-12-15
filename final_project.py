@@ -76,18 +76,19 @@ class Post:
 ## STEP 3. FIND THE MOST COMMON WORD
 ## request the data from the Facebook API
 my_facebook_posts = request_my_facebook_data()
-
-## create a list to keep the messages of my posts
-messages_lst = []
+## create two lists: one for the original posts, the other for the messages
+posts_lst = []
+modified_messages_lst = []
 for message_diction in my_facebook_posts['data']:
     # create a Post instance
     inst = Post(message_diction)
+    posts_lst.append(inst)
     # use the class method to remove the stopwords and then append the edited message to the list
-    messages_lst.append(inst.stopwords_remover())
+    modified_messages_lst.append(inst.stopwords_remover())
 
 ## create a dictionary to count how many times each non-stopword word shows up
 word_counts = {}
-for message in messages_lst:
+for message in modified_messages_lst:
     for word in message:
         if word not in word_counts:
             word_counts[word] = 0
@@ -102,10 +103,8 @@ for word in word_counts:
         frequency_value = word_counts[word]
         most_common_word = word
 
-print(most_common_word)
-
-
-
+print("* REQUEST DATA FROM THE FACEBOOK API:")
+print("The most common word among the latest 50 posts is: \n'{}'\n".format(most_common_word))
 
 
 # ========== iTunes ==========
@@ -152,7 +151,7 @@ def request_itunes_data(search_string, search_type = "song"):
         print("Getting data from the cache file...")
         return(CACHE_DICTION[unique_id])
     else:
-        print("Making data request...")
+        print("Making new data request...")
         results = requests.get(url = base_url, params = params_diction)
         itunes_data_py = json.loads(results.text)
         CACHE_DICTION[unique_id] = itunes_data_py
@@ -184,6 +183,7 @@ class Song:
 
 ## PART 3. SORTING
 ## request the data from the Facebook API
+print("* REQUEST DATA FROM THE ITUNES API:")
 search_itunes_songs = request_itunes_data("The xx")
 
 ## create a list to keep the search results
@@ -195,14 +195,14 @@ for song_diction in search_itunes_songs['results']:
     songs_lst.append(inst)
 
 ## sort the list by the song length (from longest to shortest)
+print("Sorting the results by the song length...")
 sorted_songs_lst = sorted(songs_lst, key = lambda x: x.length, reverse = True)
-for song in sorted_songs_lst:
-    print(song)
 
 ## PART 4. CREATE .CSV FILE
-itunes_data_file = open("itunes_sorted_result.csv", "w")
+print("Creating a file...")
+itunes_data_file = open("itunes_sorted_results.csv", "w")
 itunes_data_file.write('Title, Artist, Album, Length\n')
 for song in sorted_songs_lst:
-    print(song)
     itunes_data_file.write("%s, %s, %s, %s\n" % (song.title, song.artist, song.album, song.convert_track_time()))
 itunes_data_file.close()
+print("The file has been created successfully. Let's open the 'itunes_sorted_results.csv' to see sorted, and well-formatted results!")

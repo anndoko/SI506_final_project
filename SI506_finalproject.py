@@ -110,7 +110,7 @@ print("The most common word among the latest 50 posts is: \n'{}'\n".format(most_
 # ========== iTunes ==========
 ## PART 1. DATA REQUEST & CACHING
 ## set up a file for caching
-itunes_cache_file = "itunes_cache_data.csv"
+itunes_cache_file = "SI506finalproject_cache.json"
 try:
     cache_file = open(itunes_cache_file, 'r')
     cache_content = cache_file.read()
@@ -184,7 +184,7 @@ class Song:
 ## PART 3. SORTING
 ## request the data from the Facebook API
 print("* REQUEST DATA FROM THE ITUNES API:")
-search_itunes_songs = request_itunes_data("The xx")
+search_itunes_songs = request_itunes_data(most_common_word)
 
 ## create a list to keep the search results
 songs_lst = []
@@ -203,6 +203,6 @@ print("Creating a file...")
 itunes_data_file = open("itunes_sorted_results.csv", "w")
 itunes_data_file.write('Title, Artist, Album, Length\n')
 for song in sorted_songs_lst:
-    itunes_data_file.write("%s, %s, %s, %s\n" % (song.title, song.artist, song.album, song.convert_track_time()))
+    itunes_data_file.write("%s, %s, %s, %s\n" % ("".join(song.title.split(",")), "".join(song.artist.split(",")), "".join(song.album.split(",")), song.convert_track_time()))
 itunes_data_file.close()
 print("The file has been created successfully. Let's open the 'itunes_sorted_results.csv' file to see the sorted, and well-formatted results!")

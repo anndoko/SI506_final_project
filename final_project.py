@@ -205,4 +205,4 @@ itunes_data_file.write('Title, Artist, Album, Length\n')
 for song in sorted_songs_lst:
     itunes_data_file.write("%s, %s, %s, %s\n" % (song.title, song.artist, song.album, song.convert_track_time()))
 itunes_data_file.close()
-print("The file has been created successfully. Let's open the 'itunes_sorted_results.csv' to see sorted, and well-formatted results!")
+print("The file has been created successfully. Let's open the 'itunes_sorted_results.csv' file to see the sorted, and well-formatted results!")

@@ -198,3 +198,11 @@ for song_diction in search_itunes_songs['results']:
 sorted_songs_lst = sorted(songs_lst, key = lambda x: x.length, reverse = True)
 for song in sorted_songs_lst:
     print(song)
+
+## PART 4. CREATE .CSV FILE
+itunes_data_file = open("itunes_sorted_result.csv", "w")
+itunes_data_file.write('Title, Artist, Album, Length\n')
+for song in sorted_songs_lst:
+    print(song)
+    itunes_data_file.write("%s, %s, %s, %s\n" % (song.title, song.artist, song.album, song.convert_track_time()))
+itunes_data_file.close()

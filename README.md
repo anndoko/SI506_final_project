@@ -20,14 +20,13 @@ SI 506 FINAL PROJECT README
 
 * **REQUIREMENTS LIST:**
   * **Get and cache data from 2 REST APIs (list the lines where the functions to get & cache data begin and where they are invoked):**
-    1. Get data from the Facebook API without caching data:
-      1. Define a function for requesting data: *8*
-      2. Get data by invoking the function: *78*
-
-    2. Get and cache data from the iTunes API:
-      1. Set up a file for caching: *113*
-      2. Define a function for requesting and caching data: *136*
-      3. Get and cache data by invoking the function: *187*
+    1. Get data from the Facebook API without caching data
+        - Define a function for requesting data: *8*
+        - Get data by invoking the function: *78*
+    2. Get and cache data from the iTunes API
+        - Set up a file for caching: *113*
+        - Define a function for requesting and caching data: *136*
+        - Get and cache data by invoking the function: *187*
 
   * **Define at least 2 classes, each of which fulfill the listed requirements:**
     1. Define Post class: *29*
@@ -54,8 +53,7 @@ SI 506 FINAL PROJECT README
     3. Invoke the function "request_itunes_data": *187*
 
   * **Create a readable file:** *203*
-
-END REQUIREMENTS LIST
+  END REQUIREMENTS LIST
 
 * **What happen as a result of the code?**
   1. The following strings will be printed in your terminal, showing you the most common word in the last 50 posts, the process of requesting/caching data from the iTunes API, and the process of creating the .cvs file:

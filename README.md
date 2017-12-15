@@ -1,14 +1,14 @@
-SI 506 FINAL PROJECT README
+## SI 506 FINAL PROJECT README
 
 * **What does this project do?**
 
   By requesting data from the Facebook API, the project will find the most common word among the last 50 posts on my Facebook wall. The project will then use that word as a search string to request data from the iTunes, and then it will sort the results by the song length and store the sorted results in a .cvs file.
 
-* **What files are included in this project?**
-  1. README.txt
-  2. SI506_finalproject.py: this is a .py file that should be used to run the program
-  3. SI506finalproject_cache.json: this is provided as a sample file that the program outputs
-  4. itunes_sorted_results.csv: this is provided as a sample file that the program outputs
+* **What files are included in this submission?**
+  1. **README.pdf**
+  2. **SI506_finalproject.py** is a .py file that should be used to run the program
+  3. **SI506finalproject_cache.json** is provided as a sample file that the program outputs
+  4. **SampleOutput.csv** is provided as a sample file that the program outputs
 
 * **What Python modules are used in this project?**
   1. requests
@@ -16,7 +16,10 @@ SI 506 FINAL PROJECT README
 
 * **How to run the code?**
 
-  Simply download the file "SI506_finalproject.py" and enter the command line `python3 SI506_finalproject.py` in your terminal to run the code.
+  Simply download the file "SI506_finalproject.py" and enter the following command line in your terminal to run the code:
+
+  ```python3 SI506_finalproject.py```
+  ​
 
 * **REQUIREMENTS LIST:**
   * **Get and cache data from 2 REST APIs (list the lines where the functions to get & cache data begin and where they are invoked):**
@@ -53,7 +56,11 @@ SI 506 FINAL PROJECT README
     3. Invoke the function "request_itunes_data": *187*
 
   * **Create a readable file:** *203*
-  END REQUIREMENTS LIST
+
+    ​
+    END REQUIREMENTS LIST
+
+    ​ 
 
 * **What happen as a result of the code?**
   1. The following strings will be printed in your terminal, showing you the most common word in the last 50 posts, the process of requesting/caching data from the iTunes API, and the process of creating the .cvs file:
@@ -71,10 +78,9 @@ SI 506 FINAL PROJECT README
       ```
 
   2. Two files will be created after you run the program:
-      1. SI506finalproject_cache.json: this is a file that stores cached data
-      SAMPLE:
-      https://github.com/anndoko/SI506_final_project/blob/master/SI506finalproject_cache.json
+      1. **SI506finalproject_cache.json** a file that the program outputs to store the cached data
+        [SAMPLE FILE](https://github.com/anndoko/SI506_final_project/blob/master/SI506finalproject_cache.json)
 
-      2. itunes_sorted_results.csv: this is a .cvs file that stores the sorted results
-      SAMPLE:
-      https://github.com/anndoko/SI506_final_project/blob/master/itunes_sorted_results.csv
+      2. **itunes_sorted_results.csv** is a .cvs file that the program outputs to store the sorted results
+        [SAMPLE FILE](https://github.com/anndoko/SI506_final_project/blob/master/itunes_sorted_results.csv)
+

@@ -21,12 +21,10 @@ SI 506 FINAL PROJECT README
 * **REQUIREMENTS LIST:**
   * **Get and cache data from 2 REST APIs (list the lines where the functions to get & cache data begin and where they are invoked):**
     1. Get data from the Facebook API without caching data:
-
       1. Define a function for requesting data: *8*
       2. Get data by invoking the function: *78*
 
     2. Get and cache data from the iTunes API:
-
       1. Set up a file for caching: *113*
       2. Define a function for requesting and caching data: *136*
       3. Get and cache data by invoking the function: *187*
@@ -61,16 +59,18 @@ END REQUIREMENTS LIST
 
 * **What happen as a result of the code?**
   1. The following strings will be printed in your terminal, showing you the most common word in the last 50 posts, the process of requesting/caching data from the iTunes API, and the process of creating the .cvs file:
-      \n
-      \* REQUEST DATA FROM THE FACEBOOK API:
+
+      ```
+      * REQUEST DATA FROM THE FACEBOOK API:
       The most common word among the latest 50 posts is:
       'mom'
-      \n
-      \* REQUEST DATA FROM THE ITUNES API:      
+
+      * REQUEST DATA FROM THE ITUNES API:      
       Getting data from the cache file...
       Sorting the results by the song length...
       Creating a file...
       The file has been created successfully. Let's open the 'itunes_sorted_results.csv' file to see the sorted, and well-formatted results!
+      ```
 
   2. Two files will be created after you run the program:
       1. SI506finalproject_cache.json: this is a file that stores cached data

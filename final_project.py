@@ -2,9 +2,9 @@
 import requests
 import json
 
-# ===== Facebook =====
-# PART 1. DATA REQUEST
-# a function to get data (posts on my wall) from the Facebook API
+# ========== Facebook ==========
+## PART 1. DATA REQUEST
+## a function to get data (posts on my wall) from the Facebook API
 def request_my_facebook_data():
     # set up the access token
     # this new long-lived access token will expire on February 12th, 2018
@@ -25,7 +25,7 @@ def request_my_facebook_data():
 
     return facebook_data_py
 
-# PART 2. POST CLASS
+## PART 2. POST CLASS
 class Post:
     def __init__(self, post_diction):
         # message
@@ -73,20 +73,21 @@ class Post:
                 post_without_stopwords.append(word)
         return post_without_stopwords
 
-# STEP 3. FIND THE MOST COMMON WORD
-# request the data from the Facebook API
+## STEP 3. FIND THE MOST COMMON WORD
+## request the data from the Facebook API
 my_facebook_posts = request_my_facebook_data()
-# create a list to keep the messages of my posts
-my_posts_lst = []
+
+## create a list to keep the messages of my posts
+messages_lst = []
 for message_diction in my_facebook_posts['data']:
-    # create Post instances
+    # create a Post instance
     inst = Post(message_diction)
     # use the class method to remove the stopwords and then append the edited message to the list
-    my_posts_lst.append(inst.stopwords_remover())
+    messages_lst.append(inst.stopwords_remover())
 
-# create a dictionary to count how many times each non-stopword word shows up
+## create a dictionary to count how many times each non-stopword word shows up
 word_counts = {}
-for message in my_posts_lst:
+for message in messages_lst:
     for word in message:
         if word not in word_counts:
             word_counts[word] = 0
@@ -95,7 +96,7 @@ for message in my_posts_lst:
 most_common_word = ""
 frequency_value = 0
 
-# go through the dictionary (word_counts) and find the most common word
+## go through the dictionary (word_counts) and find the most common word
 for word in word_counts:
     if word_counts[word] > frequency_value:
         frequency_value = word_counts[word]
@@ -103,9 +104,13 @@ for word in word_counts:
 
 print(most_common_word)
 
-# ===== iTunes =====
-# PART 1. DATA REQUEST & CACHING
-# set up a file for caching
+
+
+
+
+# ========== iTunes ==========
+## PART 1. DATA REQUEST & CACHING
+## set up a file for caching
 itunes_cache_file = "itunes_cache_data.csv"
 try:
     cache_file = open(itunes_cache_file, 'r')
@@ -115,7 +120,7 @@ try:
 except:
     CACHE_DICTION = {}
 
-# a function to generate a unique id of a request
+## a function to generate a unique id of a request
 def unique_id_generator(base_url, params_diction):
     alphabetized_keys = sorted(params_diction.keys())
     lst = []
@@ -128,7 +133,7 @@ def unique_id_generator(base_url, params_diction):
     # return a unique id of the request
     return unique_id
 
-# a function to get data from the iTunes API
+## a function to get data from the iTunes API
 def request_itunes_data(search_string, search_type = "song"):
     # set up the base URL
     base_url = "https://itunes.apple.com/search"
@@ -159,7 +164,7 @@ def request_itunes_data(search_string, search_type = "song"):
 
         return CACHE_DICTION[unique_id]
 
-# PART 2. SONG CLASS
+## PART 2. SONG CLASS
 class Song:
     def __init__(self, song_diction):
         self.title = song_diction["trackName"]
@@ -168,20 +173,28 @@ class Song:
         self.length = song_diction["trackTimeMillis"] # milliseconds
 
     # a class method to convert milliseconds to minutes and seconds
+    # this class method will be used in the __str__ method
     def convert_track_time(self):
         track_time_min = int(self.length/1000/60)
         track_time_sec = int(self.length/1000 % 60)
         return "{} min {} sec".format(track_time_min, track_time_sec)
 
     def __str__(self):
-        return "* Title: {}\n* Artist: {}\n* Album: {}\n* Length: {} ({})\n".format(self.title, self.artist, self.album, self.convert_track_time())
+        return "* Title: {}\n* Artist: {}\n* Album: {}\n* Length: {}\n".format(self.title, self.artist, self.album, self.convert_track_time())
 
-# ===== TESTING =====
-# --- iTunes ---
-itunes_test_data_1 = request_itunes_data("Adele")
-# itunes_test_data_2 = request_itunes_data("Jack White")
-# itunes_test_data_3 = request_itunes_data("Spiritualized")
-#
-for diction in itunes_test_data_1['results']:
-    inst = Song(diction)
-    print(inst)
+## PART 3. SORTING
+## request the data from the Facebook API
+search_itunes_songs = request_itunes_data("The xx")
+
+## create a list to keep the search results
+songs_lst = []
+for song_diction in search_itunes_songs['results']:
+    # create a Song instance
+    inst = Song(song_diction)
+    # append each Song instance to the list
+    songs_lst.append(inst)
+
+## sort the list by the song length (from longest to shortest)
+sorted_songs_lst = sorted(songs_lst, key = lambda x: x.length, reverse = True)
+for song in sorted_songs_lst:
+    print(song)

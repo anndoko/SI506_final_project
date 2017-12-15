@@ -203,6 +203,6 @@ print("Creating a file...")
 itunes_data_file = open("itunes_sorted_results.csv", "w")
 itunes_data_file.write('Title,Artist,Album,Length\n')
 for song in sorted_songs_lst:
-    itunes_data_file.write("%s,%s,%s,%s\n" % ("".join(song.title.split(",")), "".join(song.artist.split(",")), "".join(song.album.split(",")), song.convert_track_time()))
+    itunes_data_file.write("%s,%s,%s,%s\n" % ("".join(song.title.replace('"', "'").split(",")), "".join(song.artist.replace('"', "'").split(",")), "".join(song.album.replace('"', "'").split(",")), song.convert_track_time()))
 itunes_data_file.close()
 print("The file has been created successfully. Let's open the 'itunes_sorted_results.csv' file to see the sorted, and well-formatted results!")

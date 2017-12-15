@@ -57,11 +57,6 @@
 
   * **Create a readable file:** *203*
 
-    ​
-    END REQUIREMENTS LIST
-
-    ​ 
-
 * **What happen as a result of the code?**
   1. The following strings will be printed in your terminal, showing you the most common word in the last 50 posts, the process of requesting/caching data from the iTunes API, and the process of creating the .cvs file:
 
@@ -79,8 +74,9 @@
 
   2. Two files will be created after you run the program:
       1. **SI506finalproject_cache.json** is a file that the program outputs to store the cached data
-        [SAMPLE FILE](https://github.com/anndoko/SI506_final_project/blob/master/SI506finalproject_cache.json)
+
+      [SAMPLE FILE](https://github.com/anndoko/SI506_final_project/blob/master/SI506finalproject_cache.json)
 
       2. **itunes_sorted_results.csv** is a .cvs file that the program outputs to store the sorted results
-        [SAMPLE FILE](https://github.com/anndoko/SI506_final_project/blob/master/itunes_sorted_results.csv)
 
+      [SAMPLE FILE](https://github.com/anndoko/SI506_final_project/blob/master/itunes_sorted_results.csv)

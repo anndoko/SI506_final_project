@@ -7,7 +7,8 @@ import json
 # a function to get data (posts on my wall) from the Facebook API
 def request_my_facebook_data():
     # set up the access token
-    facebook_access_token = "EAACEdEose0cBAB47WTQRZBH5v0JrZBI7bu5W2Rx5RIfd14FoiwaNAXYFGZC0oix1YtqTYcNgjrxvOOBldhz6hceAHmWFZAPBmjqyryYF9HMn0j2lba0cNZBqYxBgyWYCRKtH23nfv8mZAzSdVy6M4ay6GdPBtZCZAcPGrXB2ThUxcEbZB0GGyI5dBw92ldDuZCamIZD"
+    # this new long-lived access token will expire on February 12th, 2018
+    facebook_access_token = "EAAH5wRVZCn2EBAFt54m8CKxAGpBZCAu3zFOMwN8bOv3b8YmoISvZATdwaZBgLAklt0edThcy1ZBL0NoKQi3uJqcTM3UZCUO8QZBHAPH8GAhAh2ZBKim5LQ9NIhqdQMz8oojtrwjIfz59Xvvf0OWjxa34ICRZBERBzFIMZD"
 
     # set up the base URL
     base_url = 'https://graph.facebook.com/me/feed'
@@ -73,30 +74,34 @@ class Post:
         return post_without_stopwords
 
 # STEP 3. FIND THE MOST COMMON WORD
-facebook_test_data_1 = request_my_facebook_data()
-post_lst = []
-for message_diction in facebook_test_data_1['data']:
+# request the data from the Facebook API
+my_facebook_posts = request_my_facebook_data()
+# create a list to keep the messages of my posts
+my_posts_lst = []
+for message_diction in my_facebook_posts['data']:
+    # create Post instances
     inst = Post(message_diction)
-    post_lst.append(inst.stopwords_remover())
+    # use the class method to remove the stopwords and then append the edited message to the list
+    my_posts_lst.append(inst.stopwords_remover())
 
-print(post_lst)
-
+# create a dictionary to count how many times each non-stopword word shows up
 word_counts = {}
-for l in post_lst:
-    for word in l:
+for message in my_posts_lst:
+    for word in message:
         if word not in word_counts:
             word_counts[word] = 0
         word_counts[word] += 1
 
-most_frequent_word = ""
-frequency = 0
+most_common_word = ""
+frequency_value = 0
 
+# go through the dictionary (word_counts) and find the most common word
 for word in word_counts:
-    if word_counts[word] > frequency:
-        frequency = word_counts[word]
-        most_frequent_word = word
+    if word_counts[word] > frequency_value:
+        frequency_value = word_counts[word]
+        most_common_word = word
 
-print(most_frequent_word)
+print(most_common_word)
 
 # ===== iTunes =====
 # PART 1. DATA REQUEST & CACHING
@@ -164,9 +169,6 @@ class Song:
 
     def __str__(self):
         return "* Title: {}\n* Artist: {}\n* Album: {}\n* Length: {}\n".format(self.title, self.artist, self.album, self.length)
-
-
-
 
 # ===== TESTING =====
 # --- iTunes ---
